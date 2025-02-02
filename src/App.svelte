@@ -18,6 +18,7 @@
     {word: '', result: ''}
   ]);
   let currentGuess = $state("");
+  let answer = $state('');
   let letterBank = $state([]);
   let colors = $state({});
 
@@ -58,7 +59,6 @@
     }
 
     let result = '';
-    let answer = localStorage.getItem('guess');
     currentGuess.split('').forEach((letter, i) => {
       if (answer[i] === letter) {
         result += '+';
@@ -111,12 +111,11 @@
   }
 
   function endGame() {
-    message = "Answer: " + localStorage.getItem('guess').toUpperCase();
+    message = "Answer: " + answer.toUpperCase();
   }
 
   function getNewWord() {
-    let newAnswer = answers[Math.floor(Math.random() * answers.length)];
-    localStorage.setItem('guess', newAnswer);
+    answer = answers[Math.floor(Math.random() * answers.length)];
   }
 
   function reset() {
@@ -136,7 +135,7 @@
     colors = getColors(mode);
 
     if (mode === 'infinite') {
-      currentGuess = localStorage.getItem('guess');
+      currentGuess = answer;
       getNewWord();
       checkGuess();
     } else {
