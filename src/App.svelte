@@ -188,7 +188,9 @@
     margin-block: 8px;
   }
   #mode-selection {
-    border: white 1px solid;
+    background-color: #242424;
+    color: rgba(255, 255, 255, 0.87);
+    border: rgba(255, 255, 255, 0.87) 1px solid;
     border-radius: 5px;
     margin-left: 16px;
     height: 36px;
