@@ -61,17 +61,25 @@
     let result = '';
     currentGuess.split('').forEach((letter, i) => {
       if (answer[i] === letter) {
+        // Right letter, right place
         result += '+';
         updateLetterBank(letter, '+');
       } else if (answer.includes(letter)) {
-        if (currentGuess.indexOf(letter) === i)
+        // Right letter, wrong place
+        let answerInstances = answer.split('').filter((i) => i === letter).length;
+        let guessInstances = currentGuess.split('').filter((i) => i === letter).length;
+
+        if (answerInstances === 1 && guessInstances > 1) {
+          // First one is yellow unless this letter has a match later in the word
+          let futureMatch = currentGuess.split('').some((l, i) => l === letter && answer[i] === letter);
+
+          result += (currentGuess.indexOf(letter) === i && !futureMatch) ? '-' : 'x';
+        } else {
           result += '-';
-        else if (answer.match(letter).length > 1)
-          result += '-';
-        else
-          result += 'x';
+        }
         updateLetterBank(letter, '-');
       } else {
+        // Wrong letter
         result += 'x';
         updateLetterBank(letter, 'x');
       }
@@ -103,8 +111,6 @@
         newResult = '+';
       else if (matchingLetter.result === '-' || result === '-')
         newResult = '-';
-
-      console.log(newResult);
 
       letterBank[currentStatus] = {letter: letter, result: newResult}
     }
