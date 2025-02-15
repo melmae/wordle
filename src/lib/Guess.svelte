@@ -39,10 +39,23 @@
 
   .letter {
     border: solid 1px white;
+    border-radius: 8px;
     height: 64px;
     width: 64px;
     font-size: 48px;
     text-transform: capitalize;
-    margin-right: 8px
+    margin: 4px
+  }
+
+  @media only screen and (max-device-width: 480px) {
+    .word {
+      height: 64px;
+    }
+
+    .letter {
+      height: 56px;
+      width: 56px;
+      font-size: 40px;
+    }
   }
 </style>

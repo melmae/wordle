@@ -29,11 +29,11 @@
         {/each}
     </div>
     <div class="container">
-        <div style:background-color="black" style:font-size="16px" style:line-height="48px" onclick={() => updateCurrentGuess("Enter")}>Enter</div>
+        <div id="enter" onclick={() => updateCurrentGuess("Enter")}>Enter</div>
         {#each ['z','x','c','v','b','n','m'] as letter}
             <div style:background-color={getBackgroundColor(letter)} onclick={() => updateCurrentGuess(letter)}>{letter.toUpperCase()}</div>
         {/each}
-        <div style:background-color="black" style:font-size="16px" style:line-height="48px" onclick={() => updateCurrentGuess("Backspace")}>Back</div>
+        <div id="back" onclick={() => updateCurrentGuess("Backspace")}>Back</div>
     </div>
 </div>
 
@@ -45,9 +45,31 @@
     }
     .container div {
         border: solid 1px white;
+        border-radius: 4px;
+        margin: 2px;
         height: 48px;
         width: 48px;
         font-size: 32px;
         display: inline-block;
+    }
+
+    #enter, #back {
+        font-size: 16px;
+        line-height: 48px;
+        background-color: black;
+    }
+
+    @media only screen and (max-device-width: 480px) {
+        .container div {
+            height: 36px;
+            width: 36px;
+            font-size: 24px;
+        }
+
+        #enter, #back {
+            width: 48px;
+            font-size: 14px;
+            line-height: 36px;
+        }
     }
 </style>

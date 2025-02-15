@@ -147,7 +147,7 @@
 
 <svelte:document onkeydown={(e) => updateCurrentGuess(e.key)}/>
 <div class="app">
-  <h2 style:display="inline-block">Wordle</h2>
+  <h2 id="title">Wordle:</h2>
   <select id="mode-selection" onchange={(e) => {
     mode = e.target.value;
     reset();
@@ -177,9 +177,16 @@
 </div>
 
 <style>
+  #title {
+    display: inline-block;
+    margin-block: 8px;
+  }
   #mode-selection {
+    border: white 1px solid;
+    border-radius: 5px;
     margin-left: 16px;
-    height: 32px;
-    font-size: 16px;
+    height: 36px;
+    font-size: 18px;
+    font-weight: bold;
   }
 </style>
