@@ -4,6 +4,7 @@
   import {allWords} from "./all-words.js";
   import {answers} from "./possible-answers.js";
   import {getColors} from "./colors.js";
+  import Info from "./lib/Info.svelte";
 
   let mode = $state('normal');
 
@@ -153,15 +154,19 @@
 
 <svelte:document onkeydown={(e) => updateCurrentGuess(e.key)}/>
 <div class="app">
-  <h2 id="title">Wordle:</h2>
-  <select id="mode-selection" onchange={(e) => {
+  <div id="header">
+    <h2 id="title">Wordle:</h2>
+    <select id="mode-selection" onchange={(e) => {
     mode = e.target.value;
     reset();
   }}>
-    <option value="normal">Normal</option>
-    <option value="infinite">Infinite</option>
-    <option value="mystery">Mystery</option>
-  </select>
+      <option value="normal">Normal</option>
+      <option value="infinite">Infinite</option>
+      <option value="mystery">Mystery</option>
+    </select>
+    <img id="info" src="info.svg" alt="info" onclick={() => document.getElementById("info-dialog").showModal()} />
+    <Info />
+  </div>
 
   <div>
     <span>{message}</span>
@@ -183,6 +188,11 @@
 </div>
 
 <style>
+  #header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   #title {
     display: inline-block;
     margin-block: 8px;
@@ -196,5 +206,9 @@
     height: 36px;
     font-size: 18px;
     font-weight: bold;
+  }
+  #info {
+    height: 24px;
+    margin-left: 16px;
   }
 </style>
